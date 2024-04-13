@@ -1,3 +1,3 @@
 export interface PropsLayout {
-  children: string;
+  children: string | JSX.Element | JSX.Element[];
 }

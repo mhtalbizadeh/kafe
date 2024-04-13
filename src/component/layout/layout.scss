@@ -1,0 +1,106 @@
+.layout {
+  width: 100vw;
+  height: 100vh;
+  display: grid;
+  place-items: center;
+  &_children {
+    width: 100vw;
+    height: 100vh;
+  }
+  &_button {
+    border: 1px solid #d9d9d9;
+    border-radius: 50%;
+    top: 88vh;
+    width: 3.8rem;
+    height: 3.8rem;
+    position: fixed;
+    z-index: 2;
+    transition: all 0.5s;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    &:hover {
+      background-color: #ffa60041;
+      border: 1px solid #ffa500;
+      box-shadow: rgba(0, 0, 0, 0.1) 0px 4px 12px;
+    }
+  }
+  &_footer {
+    padding-top: 1vh;
+    border: 1px solid #d9d9d9;
+    position: fixed;
+    width: 100vw;
+    height: 20vh;
+    top: 80vh;
+    z-index: 3;
+    background-color: #bebcbc;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: space-between;
+    transition: all 0.5s;
+    &-unactive {
+      top: 100vh;
+      height: 0vh;
+      overflow: hidden;
+      border: 1px solid #d9d9d9;
+      position: fixed;
+      width: 100vw;
+      z-index: 3;
+      background-color: #c4c3c3;
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      justify-content: space-between;
+      transition: all 0.5s;
+    }
+    &_top {
+      width: 100vw;
+      height: 5vh;
+      display: grid;
+      place-items: center;
+      &_button {
+        width: 3rem;
+        height: 3rem;
+        border: 1px solid #7a7676;
+        border-radius: 50%;
+        transition: all 0.5s;
+        display: flex;
+        flex-direction: column;
+        align-items: center;
+        justify-content: center;
+        &:hover {
+          background-color: #ffa60041;
+          border: 1px solid #ffa500;
+          box-shadow: rgba(0, 0, 0, 0.24) 0px 3px 8px;
+        }
+      }
+    }
+    &_bottom {
+      width: 100vw;
+      height: 15vh;
+      display: flex;
+      flex-direction: row;
+      align-items: center;
+      justify-content: space-evenly;
+      &_button {
+        width: 20vw;
+        height: 7vh;
+        display: flex;
+        flex-direction: row-reverse;
+        align-items: center;
+        justify-content: center;
+        gap: 5vw;
+        border: 1px solid #7a7676;
+        border-radius: 15px;
+        transition: all 0.5s;
+        &:hover {
+            box-shadow: rgba(0, 0, 0, 0.24) 0px 3px 8px;
+          background-color: #ffa60041;
+          border: 1px solid #ffa500;
+        }
+      }
+    }
+  }
+}
