@@ -11,7 +11,7 @@ const Layout: React.FC<PropsLayout> = ({ children }) => {
   return (
     <>
       <div
-        className="layout"
+        className="layout font-serif"
         onClick={() => {
           setActiveFooter(true);
         }}
@@ -33,14 +33,14 @@ const Layout: React.FC<PropsLayout> = ({ children }) => {
           className={activeFooter ? "layout_footer-unactive" : "layout_footer"}
         >
           <div className="layout_footer_top">
-            <button
+            <div
               className="layout_footer_top_button"
               onClick={() => {
                 setActiveFooter(true);
               }}
             >
               <MdKeyboardDoubleArrowDown />
-            </button>
+            </div>
           </div>
           <div className="layout_footer_bottom">
             <button className="layout_footer_bottom_button">
