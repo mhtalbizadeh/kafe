@@ -4,10 +4,23 @@ import Layout from "../../component/layout";
 import { MdDelete } from "react-icons/md";
 import { MdEdit } from "react-icons/md";
 import { IoAddCircleOutline } from "react-icons/io5";
-import { categoryProps } from "../../api/category/category.interface";
+import { categoryDto } from "../../api/category/category.interface";
 import GetCategory from "../../api/category/get";
+import Modal from "../../component/modal";
+import Category from "./category";
 const Home = () => {
-  const [category, setCategory] = useState<categoryProps[]>([]);
+  const [category, setCategory] = useState<categoryDto[]>([]);
+  const [food, setFood] = useState<categoryDto[]>([]);
+  const [game, setGame] = useState<categoryDto[]>([]);
+  const [categoryId, setCategoryId] = useState<categoryDto>({
+    id: 0,
+    name: "",
+  });
+  const [showModalCategory, setShowModalCategory] = useState<boolean>(false);
+  const [showModalFood, setShowModalFood] = useState<boolean>(false);
+  const [showModalGame, setShowModalGame] = useState<boolean>(false);
+  const [typeCategory, setTypeCategory] = useState<"add" | "edit">("add");
+
   useEffect(() => {
     const fetch = async () => {
       try {
@@ -32,12 +45,20 @@ const Home = () => {
             <div className="home_bottom_element">
               <label className="home_bottom_element_label">
                 <div className="home_bottom_element_label_add">
-                  <IoAddCircleOutline />
+                  <IoAddCircleOutline
+                    onClick={() => {
+                      setShowModalCategory(true);
+                      setCategoryId({
+                        id: 0,
+                        name: "",
+                      });
+                      setTypeCategory("add");
+                    }}
+                  />
                 </div>
                 دسته بندی غذا
               </label>
               <div className="home_bottom_element_data">
-                {/* f */}
                 {category.map((category) => {
                   return (
                     <>
@@ -50,8 +71,18 @@ const Home = () => {
                             {category.name}
                           </div>
                           <div className="home_bottom_element_data_category_bottom_buttons">
-                            <MdDelete className="home_bottom_element_data_category_bottom_buttons_value" />
-                            <MdEdit className="home_bottom_element_data_category_bottom_buttons_value" />
+                            <MdDelete
+                              className="home_bottom_element_data_category_bottom_buttons_value"
+                              onClick={() => {}}
+                            />
+                            <MdEdit
+                              className="home_bottom_element_data_category_bottom_buttons_value"
+                              onClick={() => {
+                                setShowModalCategory(true);
+                                setCategoryId(category);
+                                setTypeCategory("edit");
+                              }}
+                            />
                           </div>
                         </div>
                       </div>
@@ -68,7 +99,6 @@ const Home = () => {
                 غذا
               </label>
               <div className="home_bottom_element_data">
-                {/* f */}
                 <div className="home_bottom_element_data_food">
                   <div className="home_bottom_element_data_food_top">
                     <div className="home_bottom_element_data_food_top_name">
@@ -101,7 +131,6 @@ const Home = () => {
                 بازی
               </label>
               <div className="home_bottom_element_data">
-                {/* f */}
                 <div className="home_bottom_element_data_food">
                   <div className="home_bottom_element_data_food_top">
                     <div className="home_bottom_element_data_food_top_name">
@@ -129,6 +158,39 @@ const Home = () => {
           </div>
         </div>
       </Layout>
+      <Modal
+        idClose="modal-categrory"
+        width="70vw"
+        height="70vh"
+        showModal={showModalCategory}
+        setShowModal={setShowModalCategory}
+      >
+        <form>
+          <label>اضافه کردن دسته بندی جدید</label>
+          <div>
+            <label></label>
+            <input type="text" />
+          </div>
+        </form>
+      </Modal>
+      <Modal
+        idClose="modal-categrory"
+        width="70vw"
+        height="70vh"
+        showModal={showModalFood}
+        setShowModal={setShowModalFood}
+      >
+        <Category data={categoryId} type="add" />
+      </Modal>
+      <Modal
+        idClose="modal-categrory"
+        width="70vw"
+        height="70vh"
+        showModal={showModalGame}
+        setShowModal={setShowModalGame}
+      >
+        <>ferfrfrefefer</>
+      </Modal>
     </>
   );
 };
