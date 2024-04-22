@@ -16,7 +16,7 @@ const Home = () => {
     id: 0,
     name: "",
   });
-  const [showModalCategory, setShowModalCategory] = useState<boolean>(false);
+  const [showModalCategory, setShowModalCategory] = useState<boolean>(true);
   const [showModalFood, setShowModalFood] = useState<boolean>(false);
   const [showModalGame, setShowModalGame] = useState<boolean>(false);
   const [typeCategory, setTypeCategory] = useState<"add" | "edit">("add");
@@ -160,18 +160,12 @@ const Home = () => {
       </Layout>
       <Modal
         idClose="modal-categrory"
-        width="70vw"
+        width="40vw"
         height="70vh"
         showModal={showModalCategory}
         setShowModal={setShowModalCategory}
       >
-        <form>
-          <label>اضافه کردن دسته بندی جدید</label>
-          <div>
-            <label></label>
-            <input type="text" />
-          </div>
-        </form>
+        <Category data={categoryId} type={typeCategory} />
       </Modal>
       <Modal
         idClose="modal-categrory"
@@ -180,7 +174,7 @@ const Home = () => {
         showModal={showModalFood}
         setShowModal={setShowModalFood}
       >
-        <Category data={categoryId} type="add" />
+        <></>
       </Modal>
       <Modal
         idClose="modal-categrory"

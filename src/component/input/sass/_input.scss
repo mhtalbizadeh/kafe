@@ -1,19 +1,17 @@
 .component-input {
   background-color: transparent;
-  font-family: Iranian Sans, sans-serif !important;
   direction: rtl !important;
-  border: 0.1rem solid rgba(164, 164, 164, 1);
-  border-radius: 1.5rem;
-  padding: 1rem 2rem;
-  font-size: 2.2rem;
-  color: rgba(0, 78, 152, 1);
+  border: 1px solid rgba(164, 164, 164, 1);
+  border-radius: 15px;
+  padding: 10px 20px;
+  font-size: 20.2px;
   transition: all 0.5s;
   &::placeholder {
-    font-size: 2rem;
+    font-size: 15px;
     color: rgba(164, 164, 164, 1);
   }
   &:focus {
     outline: 0px;
-    border: 0.1rem solid rgba(0, 78, 152, 1);
+    border: 0.1rem solid #ffa500;
   }
 }

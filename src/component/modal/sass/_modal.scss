@@ -38,6 +38,7 @@
     justify-content: center;
   }
   &-dnone {
+    direction: rtl;
     animation-name: modalAnimationReverse;
     animation-duration: 1s;
     position: absolute;
