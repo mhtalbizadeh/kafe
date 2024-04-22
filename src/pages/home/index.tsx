@@ -16,7 +16,7 @@ const Home = () => {
     id: 0,
     name: "",
   });
-  const [showModalCategory, setShowModalCategory] = useState<boolean>(true);
+  const [showModalCategory, setShowModalCategory] = useState<boolean>(false);
   const [showModalFood, setShowModalFood] = useState<boolean>(false);
   const [showModalGame, setShowModalGame] = useState<boolean>(false);
   const [typeCategory, setTypeCategory] = useState<"add" | "edit">("add");
