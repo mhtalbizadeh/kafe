@@ -4,7 +4,9 @@ export interface propsInput {
   height: string;
   width: string;
   placeholder?: string;
-  type: "password" | "text"|"number";
+  type: "password" | "text" | "number";
   textAlign: "start" | "center";
   className?: string;
+  value?: string;
+  disabel?: boolean;
 }

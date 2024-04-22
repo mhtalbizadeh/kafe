@@ -1,4 +1,4 @@
-import React, { useEffect, useState } from "react";
+import { useEffect, useState } from "react";
 import "./sass/_homePage.scss";
 import Layout from "../../component/layout";
 import { MdDelete } from "react-icons/md";
@@ -8,22 +8,39 @@ import { categoryDto } from "../../api/category/category.interface";
 import GetCategory from "../../api/category/get";
 import Modal from "../../component/modal";
 import Category from "./category";
+import { foodDto } from "../../api/food/food.interface";
+import { gameDto } from "../../api/game/game.interface";
+import GetFood from "../../api/food/get";
 const Home = () => {
+  //category
   const [category, setCategory] = useState<categoryDto[]>([]);
-  const [food, setFood] = useState<categoryDto[]>([]);
-  const [game, setGame] = useState<categoryDto[]>([]);
-  const [categoryId, setCategoryId] = useState<categoryDto>({
-    id: 0,
-    name: "",
-  });
+  const [idCategory, setIdCategory] = useState<number>(0);
+  const [nameCategory, setNameCategory] = useState<string>("");
   const [showModalCategory, setShowModalCategory] = useState<boolean>(false);
+  const [typeCategory, setTypeCategory] = useState<"add" | "edit" | "delete">(
+    "add"
+  );
+  const [realoadCategory, setRealoadCategory] = useState<boolean>(false);
+  //food
+  const [food, setFood] = useState<foodDto[]>([]);
+  const [idFood, setIdFood] = useState<number>(0);
+  const [nameFood, setNameFood] = useState<string>("");
+  const [foodCategory, setFoodCategory] = useState<number>(0);
+  const [priceFood, setPriceFood] = useState<string>("");
   const [showModalFood, setShowModalFood] = useState<boolean>(false);
-  const [showModalGame, setShowModalGame] = useState<boolean>(false);
-  const [typeCategory, setTypeCategory] = useState<"add" | "edit">("add");
+  const [typeFood, setTypeFood] = useState<"add" | "edit" | "delete">("add");
+  const [realoadFood, setRealoadFood] = useState<boolean>(false);
 
+  //game
+  const [game, setGame] = useState<gameDto[]>([]);
+  const [idGame, setIdGame] = useState<number>(0);
+  const [nameGame, setNameGame] = useState<string>("");
+  const [showModalGame, setShowModalGame] = useState<boolean>(false);
+  const [typeGame, setTypeGame] = useState<"add" | "edit">("add");
   useEffect(() => {
     const fetch = async () => {
       try {
+        setRealoadCategory(false);
         const category = await GetCategory();
         if (category && category.status === 200) {
           setCategory(category.body);
@@ -33,7 +50,21 @@ const Home = () => {
       }
     };
     fetch();
-  }, []);
+  }, [realoadCategory]);
+  useEffect(() => {
+    const fetch = async () => {
+      try {
+        setRealoadFood(false);
+        const food = await GetFood();
+        if (food && food.status === 200) {
+          setFood(food.body);
+        }
+      } catch (error) {
+        console.log(error);
+      }
+    };
+    fetch();
+  }, [realoadFood]);
   return (
     <>
       <Layout>
@@ -48,10 +79,8 @@ const Home = () => {
                   <IoAddCircleOutline
                     onClick={() => {
                       setShowModalCategory(true);
-                      setCategoryId({
-                        id: 0,
-                        name: "",
-                      });
+                      setNameCategory("");
+                      setIdCategory(0);
                       setTypeCategory("add");
                     }}
                   />
@@ -73,13 +102,19 @@ const Home = () => {
                           <div className="home_bottom_element_data_category_bottom_buttons">
                             <MdDelete
                               className="home_bottom_element_data_category_bottom_buttons_value"
-                              onClick={() => {}}
+                              onClick={() => {
+                                setShowModalCategory(true);
+                                setNameCategory(category.name);
+                                setIdCategory(category.id);
+                                setTypeCategory("delete");
+                              }}
                             />
                             <MdEdit
                               className="home_bottom_element_data_category_bottom_buttons_value"
                               onClick={() => {
                                 setShowModalCategory(true);
-                                setCategoryId(category);
+                                setNameCategory(category.name);
+                                setIdCategory(category.id);
                                 setTypeCategory("edit");
                               }}
                             />
@@ -99,28 +134,32 @@ const Home = () => {
                 غذا
               </label>
               <div className="home_bottom_element_data">
-                <div className="home_bottom_element_data_food">
-                  <div className="home_bottom_element_data_food_top">
-                    <div className="home_bottom_element_data_food_top_name">
-                      نام غذا
+                {food.map((food) => {
+                  return (
+                    <div className="home_bottom_element_data_food">
+                      <div className="home_bottom_element_data_food_top">
+                        <div className="home_bottom_element_data_food_top_name">
+                          نام غذا
+                        </div>
+                        <div className="home_bottom_element_data_food_top_price">
+                          قیمت
+                        </div>
+                      </div>
+                      <div className="home_bottom_element_data_food_bottom">
+                        <div className="home_bottom_element_data_food_bottom_title">
+                          {food.name}
+                        </div>
+                        <div className="home_bottom_element_data_food_bottom_price">
+                          {food.price} تومان
+                        </div>
+                        <div className="home_bottom_element_data_food_bottom_buttons">
+                          <MdDelete className="home_bottom_element_data_food_bottom_buttons_value" />
+                          <MdEdit className="home_bottom_element_data_food_bottom_buttons_value" />
+                        </div>
+                      </div>
                     </div>
-                    <div className="home_bottom_element_data_food_top_price">
-                      قیمت
-                    </div>
-                  </div>
-                  <div className="home_bottom_element_data_food_bottom">
-                    <div className="home_bottom_element_data_food_bottom_title">
-                      کباب
-                    </div>
-                    <div className="home_bottom_element_data_food_bottom_price">
-                      250000 تومان
-                    </div>
-                    <div className="home_bottom_element_data_food_bottom_buttons">
-                      <MdDelete className="home_bottom_element_data_food_bottom_buttons_value" />
-                      <MdEdit className="home_bottom_element_data_food_bottom_buttons_value" />
-                    </div>
-                  </div>
-                </div>
+                  );
+                })}
               </div>
             </div>
             <div className="home_bottom_element">
@@ -165,7 +204,13 @@ const Home = () => {
         showModal={showModalCategory}
         setShowModal={setShowModalCategory}
       >
-        <Category data={categoryId} type={typeCategory} />
+        <Category
+          idCategory={idCategory}
+          nameCategory={nameCategory}
+          setNameCategory={setNameCategory}
+          type={typeCategory}
+          setRealoadCategory={setRealoadCategory}
+        />
       </Modal>
       <Modal
         idClose="modal-categrory"

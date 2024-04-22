@@ -9,10 +9,14 @@ const Input: React.FC<propsInput> = ({
   type,
   id,
   textAlign,
-  className ,
+  className,
+  value,
+  disabel,
 }) => {
   return (
     <input
+      disabled={disabel}
+      value={value}
       id={id}
       type={type}
       className={`component-input ${className}`}
