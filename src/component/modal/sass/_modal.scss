@@ -1,0 +1,73 @@
+.component-modal {
+  animation-name: modalAnimation;
+  animation-duration: 0.9s;
+  position: absolute;
+  transform: translate(-50%, -50%);
+  top: 50%;
+  left: 50%;
+  z-index: 99999;
+  font-family: Iranian Sans, sans-serif !important;
+  background-image: url("../../../../assets/images/backgrounModal.png");
+  background-repeat: no-repeat;
+  background-size: cover;
+  border-radius: 5rem;
+  padding: 5rem 5rem 5rem 5rem;
+  &-bluescreen {
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100vh;
+    background-color: #33333333;
+    z-index: 99998;
+  }
+  &-close {
+    width: 4.948rem;
+    height: 4.948rem;
+    cursor: pointer;
+    top: 0;
+    right: 0;
+    margin-right: 2rem;
+  }
+  &-child {
+    margin: auto;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+  }
+  &-dnone {
+    animation-name: modalAnimationReverse;
+    animation-duration: 1s;
+    position: absolute;
+    transform: translate(-50%, -50%);
+    top: 50%;
+    left: 50%;
+    z-index: 99999;
+    font-family: Iranian Sans, sans-serif !important;
+    background-image: url("../../../../assets/images/backgrounModal.png");
+    background-repeat: no-repeat;
+    background-size: cover;
+    border-radius: 5rem;
+    padding: 5rem 5rem 5rem 5rem;
+  }
+}
+@keyframes modalAnimation {
+  0% {
+    left: 2000px;
+  }
+  64% {
+    left: 48%;
+  }
+  100% {
+    left: 50%;
+  }
+}
+@keyframes modalAnimationReverse {
+  0% {
+    left: 50%;
+  }
+  100% {
+    left: -2000px;
+  }
+}
