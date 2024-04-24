@@ -149,9 +149,18 @@ const Food: React.FC<propsFoodEdit> = ({
             setCategoryId(parseInt(e.target.value));
           }}
         >
-          <option value="">لطفا دسته بندی را انتخاب کنید</option>
+          <option value="" selected={categoryId === 0 ? true : false} hidden>
+            لطفا دسته بندی را انتخاب کنید
+          </option>
           {category.map((category) => {
-            return <option value={category.id}>{category.name}</option>;
+            return (
+              <option
+                value={category.id}
+                selected={categoryId === category.id ? true : false}
+              >
+                {category.name}
+              </option>
+            );
           })}
         </select>
         <Input

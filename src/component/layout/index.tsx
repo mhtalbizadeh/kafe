@@ -5,6 +5,7 @@ import { FaArrowUp } from "react-icons/fa";
 import { MdKeyboardDoubleArrowDown } from "react-icons/md";
 import { MdViewCompact } from "react-icons/md";
 import { MdEditNote } from "react-icons/md";
+import { Link } from "react-router-dom";
 
 const Layout: React.FC<PropsLayout> = ({ children }) => {
   const [activeFooter, setActiveFooter] = useState<boolean>(true);
@@ -43,14 +44,14 @@ const Layout: React.FC<PropsLayout> = ({ children }) => {
             </div>
           </div>
           <div className="layout_footer_bottom">
-            <button className="layout_footer_bottom_button">
+            <Link to={"/"} className="layout_footer_bottom_button">
               نمایش
               <MdViewCompact />
-            </button>
-            <button className="layout_footer_bottom_button">
+            </Link>
+            <Link to={"/menu"} className="layout_footer_bottom_button">
               اضافه کردن
               <MdEditNote />
-            </button>
+            </Link>
           </div>
         </div>
       </div>
