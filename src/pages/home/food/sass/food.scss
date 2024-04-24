@@ -1,0 +1,25 @@
+.food {
+  width: 30vw;
+  height: 60vh;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: space-around;
+  &_label {
+    align-self: flex-start;
+    font-size: 20px;
+    color: chocolate;
+  }
+  select {
+    width: 30vw;
+    height: 10vh;
+    border: 1px solid rgba(164, 164, 164, 1);
+    border-radius: 15px;
+    font-size: 15px;
+    color: rgba(164, 164, 164, 1);
+    &:focus {
+      outline: 0px;
+      border: 0.1rem solid #ffa500;
+    }
+  }
+}

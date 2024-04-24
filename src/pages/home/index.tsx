@@ -11,6 +11,7 @@ import Category from "./category";
 import { foodDto } from "../../api/food/food.interface";
 import { gameDto } from "../../api/game/game.interface";
 import GetFood from "../../api/food/get";
+import Food from "./food";
 const Home = () => {
   //category
   const [category, setCategory] = useState<categoryDto[]>([]);
@@ -20,7 +21,7 @@ const Home = () => {
   const [typeCategory, setTypeCategory] = useState<"add" | "edit" | "delete">(
     "add"
   );
-  const [realoadCategory, setRealoadCategory] = useState<boolean>(false);
+  const [reaload, setReaload] = useState<boolean>(false);
   //food
   const [food, setFood] = useState<foodDto[]>([]);
   const [idFood, setIdFood] = useState<number>(0);
@@ -29,7 +30,6 @@ const Home = () => {
   const [priceFood, setPriceFood] = useState<string>("");
   const [showModalFood, setShowModalFood] = useState<boolean>(false);
   const [typeFood, setTypeFood] = useState<"add" | "edit" | "delete">("add");
-  const [realoadFood, setRealoadFood] = useState<boolean>(false);
 
   //game
   const [game, setGame] = useState<gameDto[]>([]);
@@ -40,21 +40,10 @@ const Home = () => {
   useEffect(() => {
     const fetch = async () => {
       try {
-        setRealoadCategory(false);
         const category = await GetCategory();
         if (category && category.status === 200) {
           setCategory(category.body);
         }
-      } catch (error) {
-        console.log(error);
-      }
-    };
-    fetch();
-  }, [realoadCategory]);
-  useEffect(() => {
-    const fetch = async () => {
-      try {
-        setRealoadFood(false);
         const food = await GetFood();
         if (food && food.status === 200) {
           setFood(food.body);
@@ -64,7 +53,7 @@ const Home = () => {
       }
     };
     fetch();
-  }, [realoadFood]);
+  }, [reaload]);
   return (
     <>
       <Layout>
@@ -129,7 +118,16 @@ const Home = () => {
             <div className="home_bottom_element">
               <label className="home_bottom_element_label">
                 <div className="home_bottom_element_label_add">
-                  <IoAddCircleOutline />
+                  <IoAddCircleOutline
+                    onClick={() => {
+                      setShowModalFood(true);
+                      setTypeFood("add");
+                      setIdFood(0);
+                      setNameFood("");
+                      setFoodCategory(0);
+                      setPriceFood("");
+                    }}
+                  />
                 </div>
                 غذا
               </label>
@@ -153,8 +151,28 @@ const Home = () => {
                           {food.price} تومان
                         </div>
                         <div className="home_bottom_element_data_food_bottom_buttons">
-                          <MdDelete className="home_bottom_element_data_food_bottom_buttons_value" />
-                          <MdEdit className="home_bottom_element_data_food_bottom_buttons_value" />
+                          <MdDelete
+                            className="home_bottom_element_data_food_bottom_buttons_value"
+                            onClick={() => {
+                              setShowModalFood(true);
+                              setTypeFood("delete");
+                              setIdFood(food.id);
+                              setNameFood(food.name);
+                              setFoodCategory(food.category);
+                              setPriceFood(food.price);
+                            }}
+                          />
+                          <MdEdit
+                            className="home_bottom_element_data_food_bottom_buttons_value"
+                            onClick={() => {
+                              setShowModalFood(true);
+                              setTypeFood("delete");
+                              setIdFood(food.id);
+                              setNameFood(food.name);
+                              setFoodCategory(food.category);
+                              setPriceFood(food.price);
+                            }}
+                          />
                         </div>
                       </div>
                     </div>
@@ -209,17 +227,30 @@ const Home = () => {
           nameCategory={nameCategory}
           setNameCategory={setNameCategory}
           type={typeCategory}
-          setRealoadCategory={setRealoadCategory}
+          setRealoadCategory={setReaload}
+          reaload={reaload}
         />
       </Modal>
       <Modal
-        idClose="modal-categrory"
-        width="70vw"
-        height="70vh"
+        idClose="modal-food"
+        width="40vw"
+        height="80vh"
         showModal={showModalFood}
         setShowModal={setShowModalFood}
       >
-        <></>
+        <Food
+          category={category}
+          categoryId={foodCategory}
+          idFood={idFood}
+          nameFood={nameFood}
+          priceFood={priceFood}
+          reaload={reaload}
+          setCategoryId={setFoodCategory}
+          setNameFood={setNameFood}
+          setPriceFood={setPriceFood}
+          setReaload={setReaload}
+          type={typeFood}
+        />
       </Modal>
       <Modal
         idClose="modal-categrory"

@@ -13,6 +13,7 @@ const Category: React.FC<propsCategoryEdit> = ({
   nameCategory,
   setRealoadCategory,
   setNameCategory,
+  reaload,
 }) => {
   const [loader, setLoader] = useState<boolean>(false);
   const OnSubmitFormCategory = async (event: FormEvent<HTMLFormElement>) => {
@@ -83,7 +84,7 @@ const Category: React.FC<propsCategoryEdit> = ({
         });
         setTimeout(() => {
           document.getElementById("modal-categrory")?.click();
-          setLoader(false);
+          setLoader(!reaload);
           setRealoadCategory(true);
         }, 3000);
       }

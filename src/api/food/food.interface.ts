@@ -1,6 +1,6 @@
 export interface foodProps {
   name: string;
-  category: number;
+  category: string;
   price: string;
 }
 export interface foodDto {
