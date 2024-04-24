@@ -12,6 +12,8 @@ import { foodDto } from "../../api/food/food.interface";
 import { gameDto } from "../../api/game/game.interface";
 import GetFood from "../../api/food/get";
 import Food from "./food";
+import Game from "./game";
+import GetGame from "../../api/game/get";
 const Home = () => {
   //category
   const [category, setCategory] = useState<categoryDto[]>([]);
@@ -35,8 +37,10 @@ const Home = () => {
   const [game, setGame] = useState<gameDto[]>([]);
   const [idGame, setIdGame] = useState<number>(0);
   const [nameGame, setNameGame] = useState<string>("");
+  const [priceGame, setPriceGame] = useState<string>("");
   const [showModalGame, setShowModalGame] = useState<boolean>(false);
-  const [typeGame, setTypeGame] = useState<"add" | "edit">("add");
+  const [typeGame, setTypeGame] = useState<"add" | "edit" | "delete">("add");
+  console.log("check");
   useEffect(() => {
     const fetch = async () => {
       try {
@@ -47,6 +51,10 @@ const Home = () => {
         const food = await GetFood();
         if (food && food.status === 200) {
           setFood(food.body);
+        }
+        const game = await GetGame();
+        if (game && game.status === 200) {
+          setGame(game.body);
         }
       } catch (error) {
         console.log(error);
@@ -166,7 +174,7 @@ const Home = () => {
                             className="home_bottom_element_data_food_bottom_buttons_value"
                             onClick={() => {
                               setShowModalFood(true);
-                              setTypeFood("delete");
+                              setTypeFood("edit");
                               setIdFood(food.id);
                               setNameFood(food.name);
                               setFoodCategory(food.category);
@@ -183,33 +191,63 @@ const Home = () => {
             <div className="home_bottom_element">
               <label className="home_bottom_element_label">
                 <div className="home_bottom_element_label_add">
-                  <IoAddCircleOutline />
+                  <IoAddCircleOutline
+                    onClick={() => {
+                      setTypeGame("add");
+                      setShowModalGame(true);
+                      setNameGame("");
+                      setPriceGame("");
+                      setIdGame(0);
+                    }}
+                  />
                 </div>
                 بازی
               </label>
               <div className="home_bottom_element_data">
-                <div className="home_bottom_element_data_food">
-                  <div className="home_bottom_element_data_food_top">
-                    <div className="home_bottom_element_data_food_top_name">
-                      نام بازی
+                {game.map((game) => {
+                  return (
+                    <div className="home_bottom_element_data_food">
+                      <div className="home_bottom_element_data_food_top">
+                        <div className="home_bottom_element_data_food_top_name">
+                          نام بازی
+                        </div>
+                        <div className="home_bottom_element_data_food_top_price">
+                          قیمت یک ساعت
+                        </div>
+                      </div>
+                      <div className="home_bottom_element_data_food_bottom">
+                        <div className="home_bottom_element_data_food_bottom_title">
+                          {game.name}
+                        </div>
+                        <div className="home_bottom_element_data_food_bottom_price">
+                          {game.price} تومان
+                        </div>
+                        <div className="home_bottom_element_data_food_bottom_buttons">
+                          <MdDelete
+                            className="home_bottom_element_data_food_bottom_buttons_value"
+                            onClick={() => {
+                              setTypeGame("delete");
+                              setShowModalGame(true);
+                              setNameGame(game.name);
+                              setPriceGame(game.price);
+                              setIdGame(game.id);
+                            }}
+                          />
+                          <MdEdit
+                            className="home_bottom_element_data_food_bottom_buttons_value"
+                            onClick={() => {
+                              setTypeGame("edit");
+                              setShowModalGame(true);
+                              setNameGame(game.name);
+                              setPriceGame(game.price);
+                              setIdGame(game.id);
+                            }}
+                          />
+                        </div>
+                      </div>
                     </div>
-                    <div className="home_bottom_element_data_food_top_price">
-                      قیمت یک ساعت
-                    </div>
-                  </div>
-                  <div className="home_bottom_element_data_food_bottom">
-                    <div className="home_bottom_element_data_food_bottom_title">
-                      کباب
-                    </div>
-                    <div className="home_bottom_element_data_food_bottom_price">
-                      250000 تومان
-                    </div>
-                    <div className="home_bottom_element_data_food_bottom_buttons">
-                      <MdDelete className="home_bottom_element_data_food_bottom_buttons_value" />
-                      <MdEdit className="home_bottom_element_data_food_bottom_buttons_value" />
-                    </div>
-                  </div>
-                </div>
+                  );
+                })}
               </div>
             </div>
           </div>
@@ -253,13 +291,22 @@ const Home = () => {
         />
       </Modal>
       <Modal
-        idClose="modal-categrory"
-        width="70vw"
+        idClose="modal-game"
+        width="40vw"
         height="70vh"
         showModal={showModalGame}
         setShowModal={setShowModalGame}
       >
-        <>ferfrfrefefer</>
+        <Game
+          idGame={idGame}
+          nameGame={nameGame}
+          priceGame={priceGame}
+          reaload={reaload}
+          setNameGame={setNameGame}
+          setPriceGame={setPriceGame}
+          setReaload={setReaload}
+          type={typeGame}
+        />
       </Modal>
     </>
   );

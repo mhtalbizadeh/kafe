@@ -1,54 +1,41 @@
 import React, { useState, FormEvent } from "react";
-import "./sass/food.scss";
+import "./sass/game.scss";
 import Input from "../../../component/input";
 import Button from "../../../component/button";
 import Swal from "sweetalert2";
+import { propsGameEdit } from "./game.interface";
+import CreateGame from "../../../api/game/post";
+import PatchGame from "../../../api/game/patch";
+import DeleteGame from "../../../api/game/delete";
 
-import { propsFoodEdit } from "./food.interface";
-import CreateFood from "../../../api/food/post";
-import PatchFood from "../../../api/food/patch";
-import DeleteFood from "../../../api/food/delete";
-const Food: React.FC<propsFoodEdit> = ({
+const Game: React.FC<propsGameEdit> = ({
   type,
-  categoryId,
-  idFood,
-  nameFood,
-  priceFood,
-  setCategoryId,
-  setNameFood,
-  setPriceFood,
+  idGame,
+  nameGame,
+  priceGame,
+  setNameGame,
+  setPriceGame,
   setReaload,
   reaload,
-  category,
 }) => {
   const [loader, setLoader] = useState<boolean>(false);
-  const OnSubmitFormFood = async (event: FormEvent<HTMLFormElement>) => {
+  const OnSubmitFormGame = async (event: FormEvent<HTMLFormElement>) => {
     event.preventDefault();
-    if (nameFood === "") {
+    if (nameGame === "") {
       Swal.fire({
         toast: true,
         icon: "error",
-        title: "نام غذا نمیتواند خالی باشد",
+        title: "نام بازی نمیتواند خالی باشد",
         position: "top",
         showConfirmButton: false,
         timer: 3000,
         timerProgressBar: true,
       });
-    } else if (priceFood === "") {
+    } else if (priceGame === "") {
       Swal.fire({
         toast: true,
         icon: "error",
-        title: "قیمت غذا نمیتواند خالی باشد",
-        position: "top",
-        showConfirmButton: false,
-        timer: 3000,
-        timerProgressBar: true,
-      });
-    } else if (categoryId === 0) {
-      Swal.fire({
-        toast: true,
-        icon: "error",
-        title: "دسته بندی غذا نمیتواند خالی باشد",
+        title: "قیمت بازی نمیتواند خالی باشد",
         position: "top",
         showConfirmButton: false,
         timer: 3000,
@@ -58,32 +45,27 @@ const Food: React.FC<propsFoodEdit> = ({
       setLoader(true);
       let result;
       if (type === "add") {
-        result = await CreateFood({
-          name: nameFood,
-          category: categoryId,
-          price: priceFood,
+        result = await CreateGame({
+          name: nameGame,
+          price: priceGame,
         });
       } else if (type === "edit") {
-        result = await PatchFood(
-          { name: nameFood, category: categoryId, price: priceFood },
-          idFood
-        );
+        result = await PatchGame({ name: nameGame, price: priceGame }, idGame);
       } else if (type === "delete") {
-        console.log("check");
-        result = await DeleteFood(idFood);
+        result = await DeleteGame(idGame);
       }
       if (result && result.status === 200) {
         Swal.fire({
           toast: true,
           icon: "success",
-          title: "غذا با موفقیت ویرایش شد ",
+          title: "بازی با موفقیت ویرایش شد ",
           position: "bottom",
           showConfirmButton: false,
           timer: 3000,
           timerProgressBar: true,
         });
         setTimeout(() => {
-          document.getElementById("modal-food")?.click();
+          document.getElementById("modal-game")?.click();
           setLoader(false);
           setReaload(!reaload);
         }, 3000);
@@ -92,14 +74,14 @@ const Food: React.FC<propsFoodEdit> = ({
         Swal.fire({
           toast: true,
           icon: "success",
-          title: "غذا با موفقیت ایجاد شد ",
+          title: "بازی با موفقیت ایجاد شد ",
           position: "bottom",
           showConfirmButton: false,
           timer: 3000,
           timerProgressBar: true,
         });
         setTimeout(() => {
-          document.getElementById("modal-food")?.click();
+          document.getElementById("modal-game")?.click();
           setLoader(false);
           setReaload(!reaload);
         }, 3000);
@@ -108,14 +90,14 @@ const Food: React.FC<propsFoodEdit> = ({
         Swal.fire({
           toast: true,
           icon: "success",
-          title: "غذا با موفقیت حذف شد ",
+          title: "بازی با موفقیت حذف شد ",
           position: "bottom",
           showConfirmButton: false,
           timer: 3000,
           timerProgressBar: true,
         });
         setTimeout(() => {
-          document.getElementById("modal-food")?.click();
+          document.getElementById("modal-game")?.click();
           setLoader(false);
           setReaload(!reaload);
         }, 3000);
@@ -124,47 +106,37 @@ const Food: React.FC<propsFoodEdit> = ({
   };
   return (
     <>
-      <form className="food" onSubmit={OnSubmitFormFood}>
-        <label className="food_label">
+      <form className="game" onSubmit={OnSubmitFormGame}>
+        <label className="game_label">
           {type === "add"
-            ? "اضافه کردن غذا  "
+            ? "اضافه کردن بازی  "
             : type === "edit"
-            ? "ویرایش  غذا"
-            : "حذف غذا"}
+            ? "ویرایش  بازی"
+            : "حذف بازی"}
         </label>
         <Input
           disabel={type === "delete" ? true : false}
-          value={nameFood}
+          value={nameGame}
           type="text"
           width="30vw"
           height="10vh"
           onChange={(e) => {
-            setNameFood(e.target.value);
+            setNameGame(e.target.value);
           }}
           textAlign="start"
-          placeholder="لطفا نام غذا  را وارد کنید "
+          placeholder="لطفا نام بازی  را وارد کنید "
         />
-        <select
-          onChange={(e) => {
-            setCategoryId(parseInt(e.target.value));
-          }}
-        >
-          <option value="">لطفا دسته بندی را انتخاب کنید</option>
-          {category.map((category) => {
-            return <option value={category.id}>{category.name}</option>;
-          })}
-        </select>
         <Input
           disabel={type === "delete" ? true : false}
-          value={priceFood}
+          value={priceGame}
           type="number"
           width="30vw"
           height="10vh"
           onChange={(e) => {
-            setPriceFood(e.target.value);
+            setPriceGame(e.target.value);
           }}
           textAlign="start"
-          placeholder="لطفا قیمت غذا  را بر اساس ریال وارد کنید "
+          placeholder="لطفا قیمت بازی  را بر اساس یک ساعت وارد کنید "
         />
         <Button
           width="20vw"
@@ -180,4 +152,4 @@ const Food: React.FC<propsFoodEdit> = ({
   );
 };
 
-export default Food;
+export default Game;

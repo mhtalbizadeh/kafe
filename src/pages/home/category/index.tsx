@@ -53,7 +53,7 @@ const Category: React.FC<propsCategoryEdit> = ({
         setTimeout(() => {
           document.getElementById("modal-categrory")?.click();
           setLoader(false);
-          setRealoadCategory(true);
+          setRealoadCategory(!reaload);
         }, 3000);
       }
       if (result && result.status === 201) {
@@ -69,7 +69,7 @@ const Category: React.FC<propsCategoryEdit> = ({
         setTimeout(() => {
           document.getElementById("modal-categrory")?.click();
           setLoader(false);
-          setRealoadCategory(true);
+          setRealoadCategory(!reaload);
         }, 3000);
       }
       if (result && result.status === 204) {
@@ -84,8 +84,8 @@ const Category: React.FC<propsCategoryEdit> = ({
         });
         setTimeout(() => {
           document.getElementById("modal-categrory")?.click();
-          setLoader(!reaload);
-          setRealoadCategory(true);
+          setLoader(false);
+          setRealoadCategory(!reaload);
         }, 3000);
       }
     }
