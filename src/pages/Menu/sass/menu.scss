@@ -1,12 +1,12 @@
 .menu {
-    font-family: Iranian Sans !important;
+  font-family: Iranian Sans !important;
   width: 100vw;
   height: 100vh;
   display: flex;
   flex-direction: row-reverse;
   align-items: center;
   justify-content: center;
-  
+
   &_content {
     width: 70vw;
     height: 100vh;
@@ -15,6 +15,163 @@
     align-items: center;
     justify-content: flex-start;
     border-left: 1px solid #d9d9d9;
+    &_label {
+      width: 100%;
+      height: 7vh;
+      border-bottom: 1px solid #d9d9d9;
+      display: grid;
+      place-items: center;
+      font-size: 24px;
+      color: chocolate;
+      background-color: #f0f0f0;
+    }
+    &_tabs {
+      margin-top: 10px;
+      width: 37vw;
+      display: grid;
+      place-items: end;
+    }
+    &_value {
+      margin-top: 20px;
+      width: 69.5vw;
+      height: 81.5vh;
+      display: flex;
+      flex-direction: row-reverse;
+      align-items: flex-start;
+      justify-content: space-between;
+      &_category {
+        border-left: 1px solid #d9d9d9;
+        border-top: 1px solid #d9d9d9;
+        height: 81.5vh;
+        width: 12vw;
+        display: flex;
+        flex-direction: column;
+        align-items: center;
+        justify-content: flex-start;
+        overflow: scroll;
+        &::-webkit-scrollbar {
+          display: none;
+        }
+        &_button {
+          display: flex;
+          flex-direction: row-reverse;
+          align-items: center;
+          justify-content: space-between;
+          padding: 0vw 2vw;
+          border-bottom: 1px solid #d9d9d9;
+          width: 12vw;
+          height: 8vh;
+          background-color: #f7f6f6;
+          transition: all 0.3s;
+          color: rgb(210, 66, 30);
+          font-size: 20px;
+          &:hover {
+            padding: 0vw 1vw;
+            background-color: #f0f0f0;
+          }
+        }
+      }
+      &_food {
+        width: 56vw;
+        border: 1px solid #d9d9d9;
+        height: 80vh;
+        overflow: scroll;
+        display: flex;
+        flex-direction: column;
+        align-items: center;
+        justify-content: flex-start;
+        padding-top: 5px;
+        gap: 5px;
+        &::-webkit-scrollbar {
+          display: none;
+        }
+        &_element {
+          border: 1px solid #d9d9d9;
+          border-radius: 15px;
+          width: 53vw;
+          min-height: 10vh;
+          height: 10vh;
+          // display: flex;
+          // flex-direction: row-reverse;
+          // align-items: center;
+          // justify-content: flex-start;
+          // gap: 10vw;
+          direction: rtl;
+          display: grid;
+          grid-template-columns: 2fr 2fr 1fr;
+          align-items: center;
+          padding: 0px 10px;
+          label {
+            font-size: 18px;
+            font-weight: 300;
+          }
+          button {
+            color: #ec2d0b;
+            display: grid;
+            place-items: center;
+            border: 1px solid #d9d9d9;
+            width: 5vw;
+            height: 7vh;
+            border-radius: 10px;
+            background-color: #6dd816;
+            transition: all 0.3s;
+            &:hover {
+              background-color: #62c214;
+              transform: scaleX(1.1);
+              box-shadow: rgba(0, 0, 0, 0.16) 0px 1px 4px;
+            }
+          }
+        }
+      }
+      &_games {
+        width: 69.5vw;
+        height: 81.5vh;
+        display: flex;
+        flex-direction: column;
+        align-items: center;
+        justify-content: flex-start;
+        overflow: scroll;
+        gap: 5px;
+        &::-webkit-scrollbar {
+          display: none;
+        }
+      }
+      &_game {
+        border: 1px solid #d9d9d9;
+        width: 68vw;
+        min-height: 10vh;
+        border-radius: 15px;
+        direction: rtl;
+        display: grid;
+        grid-template-columns: 1.5fr 3fr 1fr 1fr 0.5fr;
+        align-items: center;
+        padding: 0vw 1vw;
+        label {
+          font-size: 16px;
+          font-weight: 300;
+        }
+        button {
+          color: #ec2d0b;
+          display: grid;
+          place-items: center;
+          border: 1px solid #d9d9d9;
+          width: 5vw;
+          height: 7vh;
+          border-radius: 10px;
+          background-color: #6dd816;
+          transition: all 0.3s;
+          &:hover {
+            background-color: #62c214;
+            transform: scaleX(1.1);
+            box-shadow: rgba(0, 0, 0, 0.16) 0px 1px 4px;
+          }
+          datalist {
+            border: 1px solid black;
+            width: 5vw;
+          }
+        }
+      }
+    }
   }
   &_receipt {
     width: 30vw;
@@ -23,5 +180,115 @@
     flex-direction: column;
     align-items: center;
     justify-content: flex-start;
+    &_label {
+      width: 100%;
+      height: 7vh;
+      border-bottom: 1px solid #d9d9d9;
+      display: grid;
+      place-items: center;
+      font-size: 24px;
+      color: chocolate;
+      background-color: #f0f0f0;
+    }
+    &_value {
+      margin: 10px;
+      border: 1px solid black;
+      width: 25vw;
+      min-height: 7vh;
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      gap: 5px;
+      padding-bottom: 5px;
+      &_label {
+        font-size: 20px;
+        width: 25vw;
+        height: 5vh;
+        border-bottom: 1px solid black;
+        display: grid;
+        place-items: center;
+      }
+      &_food {
+        width: 24vw;
+        border: 1px solid black;
+        display: grid;
+        grid-template-rows: auto auto;
+        align-items: center;
+        justify-items: center;
+        &_label {
+          font-size: 18px;
+        }
+        &_top {
+          width: 23.9vw;
+          height: 5vh;
+          display: grid;
+          grid-template-columns: 1.5fr 0.5fr 1fr;
+          direction: rtl;
+          &_name {
+            font-size: 16px;
+            border-left: 1px solid black;
+            display: grid;
+            place-items: center;
+          }
+          &_number {
+            font-size: 16px;
+            border-left: 1px solid black;
+            display: grid;
+            place-items: center;
+          }
+          &_price {
+            font-size: 16px;
+            display: grid;
+            place-items: center;
+          }
+        }
+        &_bottom {
+          width: 23.9vw;
+          height: 5vh;
+          border-top: 1px solid black;
+          display: grid;
+          grid-template-columns: 1.5fr 0.5fr 1fr;
+          direction: rtl;
+          &_name {
+            font-size: 16px;
+            border-left: 1px solid black;
+            display: grid;
+            place-items: center;
+          }
+          &_number {
+            font-size: 16px;
+            border-left: 1px solid black;
+            display: grid;
+            place-items: center;
+          }
+          &_price {
+            font-size: 16px;
+            display: grid;
+            place-items: center;
+          }
+        }
+      }
+      &_game{
+
+      }
+    }
   }
+}
+#myInput {
+  width: 10vw !important;
+  border: 1px solid #d9d9d9;
+  border-radius: 4px;
+  font-size: 16px;
+  margin-left: 10px;
+  transition: all 0.3s;
+}
+
+#myInput:focus {
+  border-color: #ec2d0b;
+  outline: none;
+}
+input[type="number"]::-webkit-inner-spin-button,
+input[type="number"]::-webkit-outer-spin-button {
+  -webkit-appearance: none;
+  margin: 0;
 }

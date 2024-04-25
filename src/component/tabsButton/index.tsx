@@ -14,7 +14,7 @@ const TabsButton: React.FC<TabsButtonProps> = ({
   let [marginBg, setMarginBg] = useState<string>(
     withOfButton
       ? `${(Number(withOfButton.slice(0, 2)) + 3) * (activeButtons - 1)}px`
-      : `${(activeButtons - 1) * 26}px`
+      : `${(activeButtons - 1) * 260}px`
   );
   useEffect(() => {
     setActiveButton(namsOfButton[activeButtons - 1]);
@@ -24,7 +24,7 @@ const TabsButton: React.FC<TabsButtonProps> = ({
         : `${(activeButtons - 1) * 26}px`
     );
 
-  // eslint-disable-next-line react-hooks/exhaustive-deps
+    // eslint-disable-next-line react-hooks/exhaustive-deps
   }, [activeButtons, withOfButton]);
 
   return (
@@ -50,12 +50,12 @@ const TabsButton: React.FC<TabsButtonProps> = ({
             }
             return (
               <button
-                key={index+10}
+                key={index + 10}
                 id={value}
                 style={
                   withOfButton
-                    ? { marginRight: `${marginButton}px`, width: withOfButton }
-                    : { marginRight: `${marginButton}px` }
+                    ? { marginRight: `${marginButton}0px`, width: withOfButton }
+                    : { marginRight: `${marginButton}0px` }
                 }
                 className={`${
                   activeButton === value
