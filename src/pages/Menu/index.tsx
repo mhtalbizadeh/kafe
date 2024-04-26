@@ -1,4 +1,4 @@
-import React, { useEffect, useState } from "react";
+import { useEffect, useState } from "react";
 import Layout from "../../component/layout";
 import TabsButton from "../../component/tabsButton";
 import "./sass/menu.scss";
@@ -10,6 +10,9 @@ import GetFood from "../../api/food/get";
 import GetGame from "../../api/game/get";
 import { FaAngleLeft } from "react-icons/fa6";
 import { FaCartPlus } from "react-icons/fa6";
+import Swal from "sweetalert2";
+import { IoPrint } from "react-icons/io5";
+import { GiCancel } from "react-icons/gi";
 
 const Menu = () => {
   const [receiptFood, setReceiptFood] = useState<
@@ -22,9 +25,12 @@ const Menu = () => {
   const [receiptGame, setReceiptGame] = useState<
     {
       name: string;
-      time: number;
+      timeHourse: number;
+      timeMinutes: number;
+      price: number;
     }[]
   >([]);
+
   const [activeTabs, setActiveTabs] = useState<string>("غذا");
   const [category, setCategory] = useState<categoryDto[]>([]);
   const [food, setFood] = useState<foodDto[]>([]);
@@ -74,6 +80,31 @@ const Menu = () => {
       }
     }
     return result.split("").reverse().join("");
+  }
+  function sumReceipt(
+    game: {
+      name: string;
+      timeHourse: number;
+      timeMinutes: number;
+      price: number;
+    }[],
+    food: {
+      number: number;
+      name: string;
+      price: number;
+    }[]
+  ) {
+    let sumGame: number = 0;
+    let sumFood: number = 0;
+    game.map((game) => {
+      sumGame += game.price;
+      return <></>;
+    });
+    food.map((food) => {
+      sumFood += food.price;
+      return <></>;
+    });
+    return sumGame + sumFood;
   }
   return (
     <>
@@ -185,10 +216,10 @@ const Menu = () => {
                           تومان
                         </label>
                         <input
-                          className=""
+                          className="myInput"
                           type="number"
                           list="options"
-                          id="myInput"
+                          id={`${game.id}Hourse`}
                           placeholder="ساعت"
                         />
                         <datalist id="options">
@@ -197,9 +228,10 @@ const Menu = () => {
                           })}
                         </datalist>
                         <input
+                          className="myInput"
                           type="number"
                           list="optionsMinutes"
-                          id="myInput"
+                          id={`${game.id}Minutes`}
                           placeholder="دقیقه"
                         />
                         <datalist id="optionsMinutes">
@@ -207,10 +239,81 @@ const Menu = () => {
                             return <option value={minutes}>{minutes}</option>;
                           })}
                         </datalist>
-                        <button>
-                          <FaCartPlus onClick={() => {
-                            console.log()
-                          }} />
+                        <button
+                          onClick={() => {
+                            if (
+                              (
+                                document.getElementById(
+                                  `${game.id}Hourse`
+                                ) as HTMLInputElement
+                              )?.value === ""
+                            ) {
+                              Swal.fire({
+                                toast: true,
+                                icon: "error",
+                                title: "ساعت نمیتواند خالی باشد",
+                                position: "top",
+                                showConfirmButton: false,
+                                timer: 3000,
+                                timerProgressBar: true,
+                              });
+                            } else if (
+                              (
+                                document.getElementById(
+                                  `${game.id}Minutes`
+                                ) as HTMLInputElement
+                              )?.value === ""
+                            ) {
+                              Swal.fire({
+                                toast: true,
+                                icon: "error",
+                                title: "دقیقه نمیتواند خالی باشد",
+                                position: "top",
+                                showConfirmButton: false,
+                                timer: 3000,
+                                timerProgressBar: true,
+                              });
+                            } else {
+                              let hourseTime: number = parseInt(
+                                (
+                                  document.getElementById(
+                                    `${game.id}Hourse`
+                                  ) as HTMLInputElement
+                                )?.value
+                              );
+                              let minutesTime: number = parseInt(
+                                (
+                                  document.getElementById(
+                                    `${game.id}Minutes`
+                                  ) as HTMLInputElement
+                                )?.value
+                              );
+                              setReceiptGame([
+                                ...receiptGame,
+                                {
+                                  name: game.name,
+                                  timeHourse: hourseTime,
+                                  timeMinutes: minutesTime,
+                                  price: Math.ceil(
+                                    hourseTime * parseInt(game.price) +
+                                      (minutesTime * parseInt(game.price)) / 60
+                                  ),
+                                },
+                              ]);
+                              (
+                                document.getElementById(
+                                  `${game.id}Hourse`
+                                ) as HTMLInputElement
+                              ).value = "";
+                              (
+                                document.getElementById(
+                                  `${game.id}Minutes`
+                                ) as HTMLInputElement
+                              ).value = "";
+                            }
+                          }}
+                        >
+                          <FaCartPlus />
                         </button>
                       </div>
                     );
@@ -265,6 +368,78 @@ const Menu = () => {
               ) : (
                 <></>
               )}
+              {receiptGame.length ? (
+                <>
+                  <label className="menu_receipt_value_food_label">بازی</label>
+                  <div className="menu_receipt_value_food">
+                    <div className="menu_receipt_value_food_top">
+                      <label className="menu_receipt_value_food_top_name">
+                        نام
+                      </label>
+                      <label className="menu_receipt_value_food_top_number">
+                        زمان
+                      </label>
+                      <label className="menu_receipt_value_food_top_price">
+                        قیمت
+                      </label>
+                    </div>
+
+                    {receiptGame.map((receiptGame) => {
+                      return (
+                        <div className="menu_receipt_value_food_bottom">
+                          <label className="menu_receipt_value_food_bottom_name">
+                            {receiptGame.name}
+                          </label>
+                          <label className="menu_receipt_value_food_bottom_number">
+                            {receiptGame.timeMinutes} : {receiptGame.timeHourse}
+                          </label>
+                          <label className="menu_receipt_value_food_bottom_price">
+                            {addCharacterEveryThreeChars(
+                              `${convertToPersianNumber(
+                                String(receiptGame.price)
+                              )}`,
+                              "/"
+                            )}{" "}
+                            تومان
+                          </label>
+                        </div>
+                      );
+                    })}
+                  </div>
+                </>
+              ) : (
+                <></>
+              )}
+              {receiptFood.length || receiptGame.length ? (
+                <div className="menu_receipt_value_sum">
+                  <label>جمع :</label>
+                  <label>
+                    {addCharacterEveryThreeChars(
+                      `${convertToPersianNumber(
+                        String(sumReceipt(receiptGame, receiptFood))
+                      )}`,
+                      "/"
+                    )}{" "}
+                    تومان
+                  </label>
+                </div>
+              ) : (
+                <></>
+              )}
+            </div>
+            <div className="menu_receipt_buttons">
+              <button className="menu_receipt_buttons_print">
+                <IoPrint />
+              </button>
+              <button
+                className="menu_receipt_buttons_cancel"
+                onClick={() => {
+                  setReceiptFood([]);
+                  setReceiptGame([]);
+                }}
+              >
+                <GiCancel />
+              </button>
             </div>
           </div>
         </div>
