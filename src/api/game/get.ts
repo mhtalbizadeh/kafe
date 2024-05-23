@@ -3,7 +3,7 @@ import { FetchResult, HeadersInterface } from "../fetch.interface";
 
 const GetGame = async (): Promise<FetchResult | undefined> => {
   try {
-    const url: string = `http://127.0.0.1:8000/api/gameroom/game/all/`;
+    const url: string = `http://127.0.0.1:8000/gameroom/game/all/`;
     const metaData: HeadersInterface = {
       method: "GET",
       headers: {

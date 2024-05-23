@@ -3,7 +3,7 @@ import { FetchResult, HeadersInterface } from "../fetch.interface";
 
 const GetCategory = async (): Promise<FetchResult | undefined> => {
   try {
-    const url: string = `http://127.0.0.1:8000/api/cafe/category/all/`;
+    const url: string = `http://127.0.0.1:8000/cafe/category/all/`;
     const metaData: HeadersInterface = {
       method: "GET",
       headers: {

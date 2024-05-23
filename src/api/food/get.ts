@@ -3,7 +3,7 @@ import { FetchResult, HeadersInterface } from "../fetch.interface";
 
 const GetFood = async (): Promise<FetchResult | undefined> => {
   try {
-    const url: string = `http://127.0.0.1:8000/api/cafe/food/all/`;
+    const url: string = `http://127.0.0.1:8000/cafe/food/all/`;
     const metaData: HeadersInterface = {
       method: "GET",
       headers: {

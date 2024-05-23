@@ -122,6 +122,7 @@ const Food: React.FC<propsFoodEdit> = ({
       }
     }
   };
+
   return (
     <>
       <form className="food" onSubmit={OnSubmitFormFood}>
@@ -146,7 +147,7 @@ const Food: React.FC<propsFoodEdit> = ({
         />
         <select
           onChange={(e) => {
-            setCategoryId(parseInt(e.target.value));
+            setCategoryId(parseInt( e.target.value));
           }}
         >
           <option value="" selected={categoryId === 0 ? true : false} hidden>
@@ -170,14 +171,14 @@ const Food: React.FC<propsFoodEdit> = ({
           width="30vw"
           height="10vh"
           onChange={(e) => {
-            setPriceFood(e.target.value);
+            setPriceFood( e.target.value);
           }}
           textAlign="start"
           placeholder="لطفا قیمت غذا  را بر اساس ریال وارد کنید "
         />
         <Button
-          width="20vw"
-          heigh="8vh"
+          width="25vw"
+          heigh="10vh"
           fonsize="30px"
           loader={loader}
           type="submit"

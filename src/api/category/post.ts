@@ -6,7 +6,7 @@ const CreateCategory = async (
   data: categoryProps
 ): Promise<FetchResult | undefined> => {
   try {
-    const url: string = `http://127.0.0.1:8000/api/cafe/food/addnew/category/`;
+    const url: string = `http://127.0.0.1:8000/cafe/food/addnew/category/`;
     const metaData: HeadersInterface = {
       method: "POST",
       headers: { "Content-Type": "application/json; charset=utf-8" },

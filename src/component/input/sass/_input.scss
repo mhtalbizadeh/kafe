@@ -1,17 +1,18 @@
 .component-input {
   background-color: transparent;
   direction: rtl !important;
-  border: 1px solid rgba(164, 164, 164, 1);
+  border: 2px solid #b28228;
   border-radius: 15px;
-  padding: 10px 20px;
-  font-size: 20.2px;
-  transition: all 0.5s;
+  padding: 5px 10px;
+  font-size: 26px;
+  transition: all 0.3s;
+  color: #ffe002;
   &::placeholder {
-    font-size: 15px;
-    color: rgba(164, 164, 164, 1);
+    font-size: 18px;
+    color: rgb(179, 179, 179);
   }
   &:focus {
+    transform: scale(1.1);
     outline: 0px;
-    border: 0.1rem solid #ffa500;
   }
 }

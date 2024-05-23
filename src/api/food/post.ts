@@ -6,7 +6,7 @@ const CreateFood = async (
   data: foodProps
 ): Promise<FetchResult | undefined> => {
   try {
-    const url: string = `http://127.0.0.1:8000/api/cafe/food/addnew/food/
+    const url: string = `http://127.0.0.1:8000/cafe/food/addnew/food/
 `;
     const metaData: HeadersInterface = {
       method: "POST",

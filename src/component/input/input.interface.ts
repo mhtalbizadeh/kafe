@@ -1,6 +1,6 @@
 export interface propsInput {
   id?: string;
-  onChange?: (e: any) => any;
+        onChange?: (e: any) => any;
   height: string;
   width: string;
   placeholder?: string;

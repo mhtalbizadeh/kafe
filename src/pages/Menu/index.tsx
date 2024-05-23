@@ -325,7 +325,7 @@ const Menu = () => {
           <div className="menu_receipt">
             <label className="menu_receipt_label">رسید</label>
             <div className="menu_receipt_value">
-              <label className="menu_receipt_value_label">کافه فم فان</label>
+              <label className="menu_receipt_value_label">کافه بازینو</label>
               {receiptFood.length ? (
                 <>
                   <label className="menu_receipt_value_food_label">غذا</label>

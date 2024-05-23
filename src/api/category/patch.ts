@@ -7,7 +7,7 @@ const PatchCategory = async (
   id: number
 ): Promise<FetchResult | undefined> => {
   try {
-    const url: string = `http://127.0.0.1:8000/api/cafe/food/addnew/category/${id}/`;
+    const url: string = `http://127.0.0.1:8000/cafe/food/addnew/category/${id}/`;
     const metaData: HeadersInterface = {
       method: "PATCH",
       headers: {

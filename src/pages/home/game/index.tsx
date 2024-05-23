@@ -139,8 +139,8 @@ const Game: React.FC<propsGameEdit> = ({
           placeholder="لطفا قیمت بازی  را بر اساس یک ساعت وارد کنید "
         />
         <Button
-          width="20vw"
-          heigh="8vh"
+          width="25vw"
+          heigh="10vh"
           fonsize="30px"
           loader={loader}
           type="submit"

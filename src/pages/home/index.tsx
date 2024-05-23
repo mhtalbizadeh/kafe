@@ -62,6 +62,21 @@ const Home = () => {
     };
     fetch();
   }, [reaload]);
+  function convertToPersianNumber(input: string) {
+    const persianNumbers = ["۰", "۱", "۲", "۳", "۴", "۵", "۶", "۷", "۸", "۹"];
+    return input.replace(/\d/g, (match) => persianNumbers[parseInt(match)]);
+  }
+  function addCharacterEveryThreeChars(input: string, charToAdd: string) {
+    let reversedInput = input.split("").reverse().join("");
+    let result = "";
+    for (let i = 0; i < reversedInput.length; i += 3) {
+      result += reversedInput.slice(i, i + 3);
+      if (i + 3 < reversedInput.length) {
+        result += charToAdd;
+      }
+    }
+    return result.split("").reverse().join("");
+  }
   return (
     <>
       <Layout>
@@ -156,7 +171,11 @@ const Home = () => {
                           {food.name}
                         </div>
                         <div className="home_bottom_element_data_food_bottom_price">
-                          {food.price} تومان
+                          {addCharacterEveryThreeChars(
+                            `${convertToPersianNumber(String(food.price))}`,
+                            "/"
+                          )}{" "}
+                          تومان
                         </div>
                         <div className="home_bottom_element_data_food_bottom_buttons">
                           <MdDelete
@@ -220,7 +239,11 @@ const Home = () => {
                           {game.name}
                         </div>
                         <div className="home_bottom_element_data_food_bottom_price">
-                          {game.price} تومان
+                          {addCharacterEveryThreeChars(
+                            `${convertToPersianNumber(String(game.price))}`,
+                            "/"
+                          )}{" "}
+                          تومان{" "}
                         </div>
                         <div className="home_bottom_element_data_food_bottom_buttons">
                           <MdDelete

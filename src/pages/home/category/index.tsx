@@ -109,8 +109,8 @@ const Category: React.FC<propsCategoryEdit> = ({
           placeholder="لطفا نام دسته بندی را وارد کنید "
         />
         <Button
-          width="20vw"
-          heigh="8vh"
+          width="25vw"
+          heigh="10vh"
           fonsize="30px"
           loader={loader}
           type="submit"
