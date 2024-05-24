@@ -7,32 +7,35 @@
     align-items: center;
     justify-content: space-between;
     &-active {
-      z-index: 1;
+      z-index: 0;
       position: absolute;
-      width: 250px;
-      height: 40px;
+      width: 248px;
+      height: 50px;
       border-radius: 15px;
-      background: #fff;
-      box-shadow: 0px 3px 8px 0px rgba(0, 0, 0, 0.25);
+      background-color: rgb(255, 180, 6);
+      border: 1px solid rgba(255, 182, 6, 0.26);
       transition: all 0.8s;
       transition-timing-function: ease-in-out;
       opacity: 1;
     }
     &-button {
+      z-index: 0;
       position: absolute;
       width: 250px;
-      height: 40px;
-      border-radius: 15px;
-      border: 1px solid #d9d9d9;
-      background: #ededed;
-      color: #8d8d8d;
+      height: 50px;
+      background: rgba(59, 59, 59, 0.6);
+      border-radius: 16px;
+      box-shadow: 0 4px 30px rgba(0, 0, 0, 0.1);
+      backdrop-filter: blur(11.5px);
+      -webkit-backdrop-filter: blur(11.5px);
+      border: 1px solid #b28228;
       font-size: 24px;
       font-weight: 400;
       transition: all 0.6s;
       &-label {
         position: relative;
-        z-index: 2;
-        color: #8d8d8d;
+        z-index: 4;
+        color: #ffe002;
         transition: all 0.5s;
         cursor: pointer;
       }
@@ -40,7 +43,7 @@
         &-label {
           position: relative;
           z-index: 2;
-          color: #004e98;
+          color: black;
           transition: all 0.5s;
         }
       }

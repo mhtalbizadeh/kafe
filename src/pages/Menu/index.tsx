@@ -13,6 +13,9 @@ import { FaCartPlus } from "react-icons/fa6";
 import Swal from "sweetalert2";
 import { IoPrint } from "react-icons/io5";
 import { GiCancel } from "react-icons/gi";
+import { FaEdit } from "react-icons/fa";
+import { RiDeleteBack2Fill } from "react-icons/ri";
+import CreateOrder from "../../api/order/post";
 
 const Menu = () => {
   const [receiptFood, setReceiptFood] = useState<
@@ -31,11 +34,12 @@ const Menu = () => {
     }[]
   >([]);
 
-  const [activeTabs, setActiveTabs] = useState<string>("غذا");
+  const [activeTabs, setActiveTabs] = useState<string>("خوراکی");
   const [category, setCategory] = useState<categoryDto[]>([]);
   const [food, setFood] = useState<foodDto[]>([]);
   const [game, setGame] = useState<gameDto[]>([]);
   const [foodCategory, setFoodcategory] = useState<number>(1);
+  const [activeEdit, setActiveEdit] = useState<boolean>(false);
   const generateHoursArray: number[] = Array.from(
     { length: 24 },
     (_, index) => index + 1
@@ -114,13 +118,13 @@ const Menu = () => {
             <label className="menu_content_label">فهرست</label>
             <div className="menu_content_tabs">
               <TabsButton
-                namsOfButton={["غذا", "بازی"]}
+                namsOfButton={["خوراکی", "بازی"]}
                 activeButtons={1}
                 setActiveTabs={setActiveTabs}
               />
             </div>
             <div className="menu_content_value">
-              {activeTabs === "غذا" ? (
+              {activeTabs === "خوراکی" ? (
                 <>
                   <div className="menu_content_value_category">
                     {category.map((category) => {
@@ -133,7 +137,8 @@ const Menu = () => {
                             foodCategory === category.id
                               ? {
                                   padding: "0vw 1vw",
-                                  backgroundColor: " #f0f0f0",
+                                  color: "black",
+                                  backgroundColor: " rgba(255, 182, 6, 0.84)",
                                 }
                               : {}
                           }
@@ -155,9 +160,9 @@ const Menu = () => {
                               : "d-none"
                           }
                         >
-                          <label>نام غذا : {food.name}</label>
+                          <label>نام خوراکی : {food.name}</label>
                           <label>
-                            قیمت غذا :{" "}
+                            قیمت خوراکی :{" "}
                             {addCharacterEveryThreeChars(
                               `${convertToPersianNumber(food.price)}`,
                               "/"
@@ -328,7 +333,9 @@ const Menu = () => {
               <label className="menu_receipt_value_label">کافه بازینو</label>
               {receiptFood.length ? (
                 <>
-                  <label className="menu_receipt_value_food_label">غذا</label>
+                  <label className="menu_receipt_value_food_label">
+                    خوراکی
+                  </label>
                   <div className="menu_receipt_value_food">
                     <div className="menu_receipt_value_food_top">
                       <label className="menu_receipt_value_food_top_name">
@@ -346,6 +353,40 @@ const Menu = () => {
                       return (
                         <div className="menu_receipt_value_food_bottom">
                           <label className="menu_receipt_value_food_bottom_name">
+                            {activeEdit ? (
+                              <button
+                                className="menu_receipt_value_food_bottom_name_edit"
+                                onClick={() => {
+                                  setReceiptFood((prevState) => {
+                                    const thisFood = food.find(
+                                      (item) => item.name === receiptFood.name
+                                    );
+                                    if (thisFood) {
+                                      return prevState
+                                        .map((items) =>
+                                          items.name === receiptFood.name
+                                            ? {
+                                                ...items,
+                                                number: items.number - 1,
+                                                price:
+                                                  items.price -
+                                                  parseInt(thisFood.price),
+                                              }
+                                            : items
+                                        )
+                                        .filter((items) => items.number > 0);
+                                    } else {
+                                      return [...prevState];
+                                    }
+                                  });
+                                }}
+                              >
+                                <RiDeleteBack2Fill />
+                              </button>
+                            ) : (
+                              <></>
+                            )}
+
                             {receiptFood.name}
                           </label>
                           <label className="menu_receipt_value_food_bottom_number">
@@ -388,6 +429,29 @@ const Menu = () => {
                       return (
                         <div className="menu_receipt_value_food_bottom">
                           <label className="menu_receipt_value_food_bottom_name">
+                            {activeEdit ? (
+                              <button
+                                className="menu_receipt_value_food_bottom_name_edit"
+                                onClick={() => {
+                                  setReceiptGame((prevState) => {
+                                    const thisFood = game.find(
+                                      (item) => item.name === receiptGame.name
+                                    );
+                                    if (thisFood) {
+                                      return prevState.filter(
+                                        (items) => items.name !== thisFood.name
+                                      );
+                                    } else {
+                                      return [...prevState];
+                                    }
+                                  });
+                                }}
+                              >
+                                <RiDeleteBack2Fill />
+                              </button>
+                            ) : (
+                              <></>
+                            )}
                             {receiptGame.name}
                           </label>
                           <label className="menu_receipt_value_food_bottom_number">
@@ -428,7 +492,15 @@ const Menu = () => {
               )}
             </div>
             <div className="menu_receipt_buttons">
-              <button className="menu_receipt_buttons_print">
+              <button
+                className="menu_receipt_buttons_print"
+                onClick={async () => {
+                  const result = await CreateOrder({
+                    name: "nameFood",
+                    price: "priceFood",
+                  });
+                }}
+              >
                 <IoPrint />
               </button>
               <button
@@ -439,6 +511,14 @@ const Menu = () => {
                 }}
               >
                 <GiCancel />
+              </button>
+              <button
+                className={activeEdit ? "menu_receipt_buttons_edit" : ""}
+                onClick={() => {
+                  setActiveEdit(!activeEdit);
+                }}
+              >
+                <FaEdit />
               </button>
             </div>
           </div>

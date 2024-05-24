@@ -28,7 +28,7 @@ const Food: React.FC<propsFoodEdit> = ({
       Swal.fire({
         toast: true,
         icon: "error",
-        title: "نام غذا نمیتواند خالی باشد",
+        title: "نام خوراکی نمیتواند خالی باشد",
         position: "top",
         showConfirmButton: false,
         timer: 3000,
@@ -38,7 +38,7 @@ const Food: React.FC<propsFoodEdit> = ({
       Swal.fire({
         toast: true,
         icon: "error",
-        title: "قیمت غذا نمیتواند خالی باشد",
+        title: "قیمت خوراکی نمیتواند خالی باشد",
         position: "top",
         showConfirmButton: false,
         timer: 3000,
@@ -48,7 +48,7 @@ const Food: React.FC<propsFoodEdit> = ({
       Swal.fire({
         toast: true,
         icon: "error",
-        title: "دسته بندی غذا نمیتواند خالی باشد",
+        title: "دسته بندی خوراکی نمیتواند خالی باشد",
         position: "top",
         showConfirmButton: false,
         timer: 3000,
@@ -69,14 +69,13 @@ const Food: React.FC<propsFoodEdit> = ({
           idFood
         );
       } else if (type === "delete") {
-        console.log("check");
         result = await DeleteFood(idFood);
       }
       if (result && result.status === 200) {
         Swal.fire({
           toast: true,
           icon: "success",
-          title: "غذا با موفقیت ویرایش شد ",
+          title: "خوراکی با موفقیت ویرایش شد ",
           position: "bottom",
           showConfirmButton: false,
           timer: 3000,
@@ -92,7 +91,7 @@ const Food: React.FC<propsFoodEdit> = ({
         Swal.fire({
           toast: true,
           icon: "success",
-          title: "غذا با موفقیت ایجاد شد ",
+          title: "خوراکی با موفقیت ایجاد شد ",
           position: "bottom",
           showConfirmButton: false,
           timer: 3000,
@@ -108,7 +107,7 @@ const Food: React.FC<propsFoodEdit> = ({
         Swal.fire({
           toast: true,
           icon: "success",
-          title: "غذا با موفقیت حذف شد ",
+          title: "خوراکی با موفقیت حذف شد ",
           position: "bottom",
           showConfirmButton: false,
           timer: 3000,
@@ -128,10 +127,10 @@ const Food: React.FC<propsFoodEdit> = ({
       <form className="food" onSubmit={OnSubmitFormFood}>
         <label className="food_label">
           {type === "add"
-            ? "اضافه کردن غذا  "
+            ? "اضافه کردن خوراکی  "
             : type === "edit"
-            ? "ویرایش  غذا"
-            : "حذف غذا"}
+            ? "ویرایش  خوراکی"
+            : "حذف خوراکی"}
         </label>
         <Input
           disabel={type === "delete" ? true : false}
@@ -143,7 +142,7 @@ const Food: React.FC<propsFoodEdit> = ({
             setNameFood(e.target.value);
           }}
           textAlign="start"
-          placeholder="لطفا نام غذا  را وارد کنید "
+          placeholder="لطفا نام خوراکی  را وارد کنید "
         />
         <select
           onChange={(e) => {
@@ -174,7 +173,7 @@ const Food: React.FC<propsFoodEdit> = ({
             setPriceFood( e.target.value);
           }}
           textAlign="start"
-          placeholder="لطفا قیمت غذا  را بر اساس ریال وارد کنید "
+          placeholder="لطفا قیمت خوراکی  را بر اساس ریال وارد کنید "
         />
         <Button
           width="25vw"

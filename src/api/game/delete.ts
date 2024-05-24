@@ -3,7 +3,7 @@ import { FetchResult, HeadersInterface } from "../fetch.interface";
 
 const DeleteGame = async (id: number): Promise<FetchResult | undefined> => {
   try {
-    const url: string = `http://127.0.0.1:8000/api/gameroom/game/addnew/game/${id}/
+    const url: string = `http://127.0.0.1:8000/gameroom/game/addnew/game/${id}/
 `;
     const metaData: HeadersInterface = {
       method: "DELETE",

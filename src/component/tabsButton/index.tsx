@@ -74,7 +74,7 @@ const TabsButton: React.FC<TabsButtonProps> = ({
               >
                 <label
                   className="tabsbutton-element-button-label"
-                  style={activeButton === value ? { color: "#004e98" } : {}}
+                  style={activeButton === value ? { color: "black",zIndex:"4" } : {}}
                 >
                   {value}
                 </label>

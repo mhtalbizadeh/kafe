@@ -14,6 +14,7 @@ import GetFood from "../../api/food/get";
 import Food from "./food";
 import Game from "./game";
 import GetGame from "../../api/game/get";
+
 const Home = () => {
   //category
   const [category, setCategory] = useState<categoryDto[]>([]);
@@ -152,7 +153,7 @@ const Home = () => {
                     }}
                   />
                 </div>
-                غذا
+                خوراکی
               </label>
               <div className="home_bottom_element_data">
                 {food.map((food) => {
@@ -160,7 +161,7 @@ const Home = () => {
                     <div className="home_bottom_element_data_food">
                       <div className="home_bottom_element_data_food_top">
                         <div className="home_bottom_element_data_food_top_name">
-                          نام غذا
+                        نام خوراکی
                         </div>
                         <div className="home_bottom_element_data_food_top_price">
                           قیمت
