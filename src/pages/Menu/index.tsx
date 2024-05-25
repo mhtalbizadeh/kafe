@@ -262,7 +262,7 @@ const Menu = () => {
                                 timer: 3000,
                                 timerProgressBar: true,
                                 background: "black",
-                                color:"yellow"
+                                color: "yellow",
                               });
                             } else if (
                               (
@@ -499,11 +499,54 @@ const Menu = () => {
               <button
                 className="menu_receipt_buttons_print"
                 onClick={async () => {
-                  const result = await CreateOrder({
-                    name: ["nameFood"],
-                    price: ["25000"],
-                  });
-                  console.log(result)
+                  let receipt: { name: string; price: string }[] = [];
+                  for (let i = 0; i < receiptFood.length; i++) {
+                    if (receiptFood[i].number > 1) {
+                      let thisFood = food.find(
+                        (item) => item.name === receiptFood[i].name
+                      );
+                      if (thisFood) {
+                        for (let j = receiptFood[i].number; j >= 1; j--) {
+                          receipt.push({
+                            name: thisFood?.name,
+                            price: thisFood?.price,
+                          });
+                        }
+                      }
+                    } else {
+                      receipt.push({
+                        name: receiptFood[i].name,
+                        price: String(receiptFood[i].price),
+                      });
+                    }
+                  }
+                  const resultFood = await CreateOrder(receipt);
+                  const resultGame = await CreateOrder(
+                    receiptGame.map((receiptGame) => {
+                      return {
+                        name: receiptGame.name,
+                        price: String(receiptGame.price),
+                      };
+                    })
+                  );
+                  if (
+                    resultFood?.status === 201 ||
+                    resultGame?.status === 201
+                  ) {
+                    Swal.fire({
+                      toast: true,
+                      icon: "success",
+                      title: "رسید با موفقیت ثبت شد",
+                      position: "bottom",
+                      showConfirmButton: false,
+                      timer: 3000,
+                      timerProgressBar: true,
+                      background: "black",
+                      color: "yellow",
+                    });
+                    setReceiptFood([]);
+                    setReceiptGame([]);
+                  }
                 }}
               >
                 <IoPrint />

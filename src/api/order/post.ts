@@ -3,7 +3,7 @@ import { FetchResult, HeadersInterface } from "../fetch.interface";
 import { orderProps } from "./order.interface";
 
 const CreateOrder = async (
-  data: orderProps
+  data: orderProps[]
 ): Promise<FetchResult | undefined> => {
   try {
     const url: string = `http://127.0.0.1:8000//orders/orders/addnew/`;
