@@ -20,6 +20,8 @@ const Category: React.FC<propsCategoryEdit> = ({
     event.preventDefault();
     if (nameCategory === "") {
       Swal.fire({
+        background: "black",
+        color: "yellow",
         toast: true,
         icon: "error",
         title: "نام دسته بندی نمیتواند خالی باشد",
@@ -42,6 +44,8 @@ const Category: React.FC<propsCategoryEdit> = ({
       }
       if (result && result.status === 200) {
         Swal.fire({
+          background: "black",
+          color: "yellow",
           toast: true,
           icon: "success",
           title: "دسته بندی با موفقیت ویرایش شد ",
@@ -58,6 +62,8 @@ const Category: React.FC<propsCategoryEdit> = ({
       }
       if (result && result.status === 201) {
         Swal.fire({
+          background: "black",
+          color: "yellow",
           toast: true,
           icon: "success",
           title: "دسته بندی با موفقیت ایجاد شد ",
@@ -74,6 +80,8 @@ const Category: React.FC<propsCategoryEdit> = ({
       }
       if (result && result.status === 204) {
         Swal.fire({
+          background: "black",
+          color: "yellow",
           toast: true,
           icon: "success",
           title: "دسته بندی با موفقیت حذف شد ",

@@ -23,6 +23,8 @@ const Game: React.FC<propsGameEdit> = ({
     event.preventDefault();
     if (nameGame === "") {
       Swal.fire({
+        background: "black",
+        color: "yellow",
         toast: true,
         icon: "error",
         title: "نام بازی نمیتواند خالی باشد",
@@ -33,6 +35,8 @@ const Game: React.FC<propsGameEdit> = ({
       });
     } else if (priceGame === "") {
       Swal.fire({
+        background: "black",
+        color: "yellow",
         toast: true,
         icon: "error",
         title: "قیمت بازی نمیتواند خالی باشد",
@@ -56,6 +60,8 @@ const Game: React.FC<propsGameEdit> = ({
       }
       if (result && result.status === 200) {
         Swal.fire({
+          background: "black",
+          color: "yellow",
           toast: true,
           icon: "success",
           title: "بازی با موفقیت ویرایش شد ",
@@ -72,6 +78,8 @@ const Game: React.FC<propsGameEdit> = ({
       }
       if (result && result.status === 201) {
         Swal.fire({
+          background: "black",
+          color: "yellow",
           toast: true,
           icon: "success",
           title: "بازی با موفقیت ایجاد شد ",
@@ -88,6 +96,8 @@ const Game: React.FC<propsGameEdit> = ({
       }
       if (result && result.status === 204) {
         Swal.fire({
+          background: "black",
+          color: "yellow",
           toast: true,
           icon: "success",
           title: "بازی با موفقیت حذف شد ",

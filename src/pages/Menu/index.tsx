@@ -261,6 +261,8 @@ const Menu = () => {
                                 showConfirmButton: false,
                                 timer: 3000,
                                 timerProgressBar: true,
+                                background: "black",
+                                color:"yellow"
                               });
                             } else if (
                               (
@@ -277,6 +279,8 @@ const Menu = () => {
                                 showConfirmButton: false,
                                 timer: 3000,
                                 timerProgressBar: true,
+                                background: "black",
+                                color: "yellow",
                               });
                             } else {
                               let hourseTime: number = parseInt(
@@ -496,9 +500,10 @@ const Menu = () => {
                 className="menu_receipt_buttons_print"
                 onClick={async () => {
                   const result = await CreateOrder({
-                    name: "nameFood",
-                    price: "priceFood",
+                    name: ["nameFood"],
+                    price: ["25000"],
                   });
+                  console.log(result)
                 }}
               >
                 <IoPrint />
