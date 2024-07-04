@@ -5,6 +5,7 @@ import { FaArrowUp } from "react-icons/fa";
 import { MdKeyboardDoubleArrowDown } from "react-icons/md";
 import { MdViewCompact } from "react-icons/md";
 import { MdEditNote } from "react-icons/md";
+import { FaSquarePollVertical } from "react-icons/fa6";
 import { Link } from "react-router-dom";
 
 const Layout: React.FC<PropsLayout> = ({ children }) => {
@@ -44,6 +45,10 @@ const Layout: React.FC<PropsLayout> = ({ children }) => {
             </div>
           </div>
           <div className="layout_footer_bottom">
+            <Link to={"/order"} className="layout_footer_bottom_button">
+              گزارش گیری
+              <FaSquarePollVertical />
+            </Link>
             <Link to={"/"} className="layout_footer_bottom_button">
               نمایش
               <MdViewCompact />

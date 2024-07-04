@@ -2,8 +2,12 @@ export interface orderProps {
   name: string;
   price: string;
 }
-export interface gameDto {
-  id: number;
+export interface orderChartProps {
   name: string;
-  price: string;
+  start_date: string;
+  end_date: string;
+}
+export interface orderAllChartProps {
+  start_date: string;
+  end_date: string;
 }

@@ -26,8 +26,8 @@ const Food: React.FC<propsFoodEdit> = ({
     event.preventDefault();
     if (nameFood === "") {
       Swal.fire({
-                           background: "black",
-                                color: "yellow",
+        background: "black",
+        color: "yellow",
         toast: true,
         icon: "error",
         title: "نام خوراکی نمیتواند خالی باشد",
@@ -38,8 +38,8 @@ const Food: React.FC<propsFoodEdit> = ({
       });
     } else if (priceFood === "") {
       Swal.fire({
-                           background: "black",
-                                color: "yellow",
+        background: "black",
+        color: "yellow",
         toast: true,
         icon: "error",
         title: "قیمت خوراکی نمیتواند خالی باشد",
@@ -50,8 +50,8 @@ const Food: React.FC<propsFoodEdit> = ({
       });
     } else if (categoryId === 0) {
       Swal.fire({
-                           background: "black",
-                                color: "yellow",
+        background: "black",
+        color: "yellow",
         toast: true,
         icon: "error",
         title: "دسته بندی خوراکی نمیتواند خالی باشد",
@@ -79,8 +79,8 @@ const Food: React.FC<propsFoodEdit> = ({
       }
       if (result && result.status === 200) {
         Swal.fire({
-                             background: "black",
-                                color: "yellow",
+          background: "black",
+          color: "yellow",
           toast: true,
           icon: "success",
           title: "خوراکی با موفقیت ویرایش شد ",
@@ -97,8 +97,8 @@ const Food: React.FC<propsFoodEdit> = ({
       }
       if (result && result.status === 201) {
         Swal.fire({
-                             background: "black",
-                                color: "yellow",
+          background: "black",
+          color: "yellow",
           toast: true,
           icon: "success",
           title: "خوراکی با موفقیت ایجاد شد ",
@@ -115,8 +115,8 @@ const Food: React.FC<propsFoodEdit> = ({
       }
       if (result && result.status === 204) {
         Swal.fire({
-                             background: "black",
-                                color: "yellow",
+          background: "black",
+          color: "yellow",
           toast: true,
           icon: "success",
           title: "خوراکی با موفقیت حذف شد ",
@@ -158,7 +158,7 @@ const Food: React.FC<propsFoodEdit> = ({
         />
         <select
           onChange={(e) => {
-            setCategoryId(parseInt( e.target.value));
+            setCategoryId(parseInt(e.target.value));
           }}
         >
           <option value="" selected={categoryId === 0 ? true : false} hidden>
@@ -182,7 +182,7 @@ const Food: React.FC<propsFoodEdit> = ({
           width="30vw"
           height="10vh"
           onChange={(e) => {
-            setPriceFood( e.target.value);
+            setPriceFood(e.target.value);
           }}
           textAlign="start"
           placeholder="لطفا قیمت خوراکی  را بر اساس ریال وارد کنید "

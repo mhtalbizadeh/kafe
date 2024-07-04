@@ -1,0 +1,48 @@
+.order {
+  font-family: Iranian Sans !important;
+  width: 100vw;
+  height: 100vh;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: flex-start;
+  gap: 10px;
+  &_head {
+    width: 70vw;
+    height: 15vh;
+    display: flex;
+    flex-direction: row;
+    align-items: center;
+    justify-content: space-between;
+    select{
+      font-size: large;
+          direction: rtl;
+        color: #ffe002;
+        width: 10vw;
+        height: 7vh;
+        display: grid;
+        place-items: center;
+        padding-right: 1.5vw;
+        transition: all 0.5s;
+        background: rgba(3, 3, 3, 0.27);
+        border: 1px solid #ffe002;
+        border-radius: 16px;
+        box-shadow: 0 4px 30px rgba(0, 0, 0, 0.1);
+        backdrop-filter: blur(5px);
+        -webkit-backdrop-filter: blur(5px);
+        &:hover {
+          color: #1c1c1c;
+          background: rgba(255, 182, 6, 0.84);
+          border-radius: 16px;
+          box-shadow: 0 4px 30px rgba(0, 0, 0, 0.1);
+          backdrop-filter: blur(15.5px);
+          -webkit-backdrop-filter: blur(15.5px);
+          border: 1px solid rgba(255, 182, 6, 0.26);
+        }
+    }
+  }
+  &_chart {
+    width: 90vw;
+    height: 70vh;
+  }
+}
